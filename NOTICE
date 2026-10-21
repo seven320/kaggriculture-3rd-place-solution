@@ -1,0 +1,83 @@
+Kaggriculture 3rd place solution (team DSM)
+
+The repository's own code and documents are licensed under CC BY 4.0 (see LICENSE).
+Some files contain material derived from third-party software. Those parts remain
+under their original licence, as listed below.
+
+-------------------------------------------------------------------------------
+kaggle-environments 1.32.7 (Apache License 2.0)
+https://github.com/Kaggle/kaggle-environments
+Source file: kaggle_environments/envs/kaggriculture/kaggriculture.py
+             (sha256 bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e)
+Full licence text: LICENSES/Apache-2.0.txt
+-------------------------------------------------------------------------------
+
+Copied definitions (Python). The following definitions were copied from
+kaggriculture.py without changing their text, in the order they appear in that
+file; only these definitions were taken (the change is the extraction itself).
+Each file marks the copied block with "公式ルールの抜き出し ここから / ここまで"
+("start / end of the extract of the official rules"):
+
+  CROPS, ANIMALS, PRODUCTS, FARMER_MOVES, _shed_access_tiles, _is_shed_adjacent,
+  _new_plant, _new_animal, _farmer_position, _set_farmer_position,
+  _farmer_inventory, _inv_add, _inv_take, _apply_unit_action
+
+  - postprocess/postprocess_c1p_w9p.py (and its identical copies in submission/sub126/
+    and eval/inputs/team_subs_20261001/sub124/source/)
+  - eval/experiments/share_w9t_20260929/postprocess_w9t.py
+
+  The file headers mention "LICENSE_kaggle_environments_Apache-2.0.txt in the same
+  folder"; a copy of LICENSES/Apache-2.0.txt with that name is placed next to each
+  of these files. postprocess/postprocess_c1p_w9p.py is kept byte-identical to the
+  file used in the final submissions, so its header was not edited.
+
+Rust port (translation). The Rust engine reproduces the game rules of
+kaggriculture.py. Game data (crop, animal, market and board constants) was copied
+from it, and the transition, initialisation and data model logic was ported from
+it and modified (translated to Rust and restructured for batched rollouts). Files
+carrying a change notice at the top:
+
+  - engine/rust/kaggriculture-engine/src/constants.rs
+  - engine/rust/kaggriculture-engine/src/rules.rs
+  - engine/rust/kaggriculture-engine/src/init.rs
+  - engine/rust/kaggriculture-engine/src/model.rs
+
+  The rest of engine/rust/ (batch.rs, the test fixtures, kaggriculture-python-bridge,
+  kaggriculture-trace-policy, kagg-ppo-native) is written against that engine
+  and follows the official observation and action formats. It does not copy
+  kaggriculture.py code.
+
+C++ engine (third-party code, modified). The C++ engine of the training kit is
+based on the public Kaggle notebook "4000x environment speedup | Kaggriculture"
+by nikital7, which itself is a C++ port of kaggriculture.py:
+
+  https://www.kaggle.com/code/nikital7/4000x-environment-speedup-kaggriculture
+  Licence: Apache License 2.0 (the licence of public Kaggle notebooks);
+  full text in LICENSES/Apache-2.0.txt.
+
+The notebook wrote these files with %%writefile. We extracted them, updated the
+game rules to kaggle-environments 1.32.7, and added Python bindings:
+
+  - training/kit/fast/pyrandom.hpp   copied unchanged (CPython-compatible
+                                     Mersenne Twister)
+  - training/kit/fast/validate.cpp   copied unchanged
+  - training/kit/fast/sim.hpp        modified: patched to the 1.32.7 rules (hinge
+                                     price shape for carrot, tomato and egg, and
+                                     related changes)
+  - training/kit/fast/sim_var.hpp    modified further from sim.hpp (rule variants
+                                     used in training)
+  - training/kit/fast/export_trace.py  modified (2 lines)
+
+The modified files carry a change notice at the top. kagsim.cpp, kagsim_var.cpp
+(pybind11 bindings) and the rest of training/kit/fast/ are our own code written
+against this engine.
+
+Constants. Several post-processing and evaluation files restate a few official
+values (for example the market base prices in postprocess/postprocess_d23s_p1.py
+and eval/experiments/evening_deposit_20260930/postprocess_ev.py, or the board and
+shed layout in postprocess/collect_plan_d29.py).
+
+Runtime use (no copy). Some evaluation files import the installed
+kaggle_environments package at run time, or read kaggriculture.py and execute or
+parse it (for example waste_replace2.py and run_p_ed.py). The package is not
+redistributed here.

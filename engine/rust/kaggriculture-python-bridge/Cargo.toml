@@ -1,0 +1,20 @@
+[package]
+name = "kaggriculture-python-bridge"
+version = "0.1.0"
+edition = "2024"
+publish = false
+autobins = false
+
+[dependencies]
+anyhow = "1.0"
+kaggriculture-engine = { path = "../kaggriculture-engine" }
+kaggriculture-trace-policy = { path = "../kaggriculture-trace-policy" }
+serde_json = "1.0"
+
+[[bin]]
+name = "simulation-server"
+path = "src/bin/simulation_server.rs"
+
+[[bin]]
+name = "policy-planning-server"
+path = "src/bin/policy_planning_server.rs"

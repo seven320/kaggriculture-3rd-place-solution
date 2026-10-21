@@ -1,0 +1,131 @@
+{
+ "_public_note": "Public copy. This file is the protocol as fixed before the run. Paths were rewritten to this repository's layout (private experiment folders -> eval/experiments/, the evaluation runtime -> eval/harness/, the shared post-processing -> postprocess/, the local scratch root -> $KAGG_SCRATCH). The sha256 values are those of the files as run; files that only had their path constants cleaned for publication now hash differently, so `part` mode refuses to start until code_sha256 is regenerated (see eval/README.md). The harness packages and the native library were also renamed for publication (scripts.kagg_*, libkagg_ppo_native.so); keys use the new names, hashes are those of the files as run.",
+ "created_jst": "2026-10-17(本走行の起動前に固定。smoke 未実施・未承認)",
+ "purpose": "最終提出 sub125 / sub126 の方策 gen70 に、gen41_postproc_20261001 と同じ同一局 A/B を掛け直す。後処理の各段(版 12、D23S_p1、MELON16、melon_replant)の寄与を gen70 で測る",
+ "learner": {
+  "path": "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src",
+  "policy_sha256": "76ec119f8513c8b728fbb0501b2839a0fe4556fdba96bbf6b8bd7e93b007f23c",
+  "file_sha256": {
+   "main.py": "01968cd3f005bba338e84a293a6114c61fc845e07f07a6aa8ab052402419b2a7",
+   "model_ptr_infer.py": "4198f8b9c4807b27385126af7d4deb5a0c85fc6150a280baa5c61725acb64e97",
+   "model_tf.py": "970c191073d55b59cfec8441ab5554b30b660bb28f5a1f9d8794d16281c24bc2",
+   "obs_feat.py": "8d20f20d36836799c3cf21baeba865ddcbd34cdc305090f64cb655f22c740609",
+   "cfg.json": "42b0cf625f16c3cf5d00c5f0de2329f237784f8be9cf98ae4aa286ec31baa095",
+   "stock_target.json": "362f6ea695639c8fb9876062501e5b97b83e43ed01c4d13b44a160c6d43ee62c",
+   "policy.pt": "76ec119f8513c8b728fbb0501b2839a0fe4556fdba96bbf6b8bd7e93b007f23c"
+  },
+  "provenance": {
+   "policy.pt": "$KAGG_SCRATCH/team_subs_20261001/sub125/source/policy.pt(sub126 と同一 sha)",
+   "other_6_files": "$KAGG_SCRATCH/shimishige_teamabcw_20261001/teamabcw_gen41_paceland_liq(gen41 の main.py / model_ptr_infer.py / model_tf.py / obs_feat.py / cfg.json / stock_target.json をそのまま複製)"
+  },
+  "note": "sub125 main.py の 1〜36 行・46〜263 行は gen41 main.py の 1〜36 行・37〜254 行と同一(差は後処理の import 37〜45 行と agent() の return 264 行だけ)。cfg/model/obs_feat/stock_target は sub125 と同一 sha"
+ },
+ "arms": {
+  "A": "gen70 + gen41 main.py そのまま(網 → _postprocess = _land(_pace(.)))。run_gen41 の Base41 だけ",
+  "C": "A + W3+W5+W6+W9'+WT(Top35 → MTop M5)+ 最終日の回収計画(708、α=0.01)= 版 12。RG.chain(d23s=False)",
+  "B": "A + Top35 → MTop → D23S_p1(min_ratio 1.0)→ 回収計画 = 版 13。RG.chain(d23s=True)。sub125 main.py 264 行の MELON16 を除いた順序",
+  "D": "B + MELON16(sub125/source/melon16.py の apply(obs, action) をそのまま、回収計画の後)= sub125 main.py 264 行の agent()",
+  "E": "D + melon_replant(sub126/source/melon_replant.py の apply(obs, action) をそのまま、MELON16 の後)= sub126 main.py 265 行の agent()"
+ },
+ "opponents": [
+  "sub121_v109",
+  "sub122_v4x20",
+  "sub123s_gen21",
+  "mmpqbcw_gen32",
+  "mmpqbcw_gen34",
+  "mmpqbcw_gen35",
+  "sub124"
+ ],
+ "opponent_notes": "前 5 本は run_g5new と同じ読み込み。mmpqbcw_gen35 は OppPP(_land(_pace(.)))。sub124 = チーム提出(gen37 + 版 12 構成 2、main.py は example_gen35_base_search と同一)→ 相手側にも Base35 → Top35 → MTop → PTop(708、α=0.01)を掛ける。gen41 自身は入れない",
+ "waves": [
+  [
+   "sub121_v109",
+   "sub122_v4x20"
+  ],
+  [
+   "sub123s_gen21",
+   "mmpqbcw_gen32"
+  ],
+  [
+   "mmpqbcw_gen34",
+   "mmpqbcw_gen35"
+  ],
+  [
+   "sub124"
+  ]
+ ],
+ "seeds": {
+  "first": 174300000,
+  "count": 128
+ },
+ "games_per_arm": 1792,
+ "jobs": "32 job/腕(16 seed × 4 波)。腕ごとに 11 プロセス(k=0..10、job j は (j-1)%11==k)、PLAN_PROCS=2。腕は 1 本ずつ順に(並列 11、12 以下)",
+ "comparison": "同じ opponent・seed・learner_player の局どうし。C−A、B−C、D−B、E−D、D−A(勝率差 [seed bootstrap 95%]、負け→勝ち / 勝ち→負け を +n / -n で、符号検定 p、平均資金差 [95%])、腕ごとの勝/分/敗、相手別の D−B・D−A(report_gen70.py)",
+ "integrity": "各腕 X≠A: X の最終行動が初めて変わる手までは A の特徴+行動 hash と一致、変わらなかった局は全手 hash と結果が一致。診断: D は MELON16 が初めて変える手までは B と、E は melon_replant が初めて変える手までは D と hash 一致",
+ "smoke": {
+  "dir": "smoke/<腕>(sub124 × seed 174300000〜015 × 両 player = 32 局/腕)",
+  "parity_submission": "先頭 2 seed × 両 player の 4 局の全 719 手で、harness の最終行動 = 同じ公式観測に sub125(A/C/B/D)/ sub126(E)の main.py の agent()(腕に無い段は恒等)を掛けた行動",
+  "result": null
+ },
+ "stopping": "途中の成績で停止・延長・構成変更なし。自動再起動なし",
+ "submission": false,
+ "frozen": {
+  "run_gen41.py": "e178ef3881ec0da46e3934c57d50d2a5ba51a246c58e05cd00d8557e88c00385"
+ },
+ "code_sha256": {
+  "eval/experiments/gen35_postproc_20260930/run_g35.py": "7a06fea25fc8ebd94cb684db33a2a9f541804215742b55b8cc660d2dcb4c9b9b",
+  "eval/experiments/sub121_market_pp_20260930/run_m.py": "819129c58cf9fca70b1b2006f58c3da6551a243e60fa3012f132a45dafb41656",
+  "eval/experiments/sub121_market_pp_20260930/market_pp.py": "d9f9e456c7a947fe3417a4656d5dfe5b0d8ddeefb3aa2c95682f83e86d2c5f82",
+  "eval/experiments/sub121_c1c2_20260930/run_c.py": "85dc3e7b6f466573e4659b05add36cfcd2498bf360aadb9dbd1d705f31fcc2b1",
+  "eval/experiments/sub121_w9t_20260930/run.py": "29963ac1dd9ea5543e9adca0f5e843b1b982501cb27dfab13afe738dd09cc09d",
+  "eval/experiments/pass_noop_replace_v104_20260929/waste_replace2.py": "2f46e499eea2b9a7e5d0bc6e00d2553735aca9e44273b3c52059290f34019453",
+  "eval/harness/nmb_eval.py": "120c9652e050182aa45d0ca275d42c8154a97a44ccbc611776f2533e78c2f2ad",
+  "site-packages/kaggle_environments/envs/kaggriculture/kaggriculture.py": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+  "engine/rust/target/release/libkagg_ppo_native.so": "4c211070b76d829c11c37b5a1dd60c19547b0779863536a41a175bc4f7d5557d",
+  "eval/experiments/collect_start_alpha_20260930/run_g5new.py": "1071394224fc466c73d9664164d15da032a550690fa93ccce27db21848dc8ac2",
+  "eval/experiments/sub121_collect_early_deposit_20260930/run_p_ed.py": "4b055b6e1c69480f3bd97ab4dadcc9694215d0b9a94fee0606ac42ef0857eada",
+  "eval/experiments/sub121_collect_early_deposit_20260930/planner_ed.py": "1f24205c972446b712cbdd3f9af8e64ceb43d65e7524b83d42aaa4332e165c5e",
+  "eval/experiments/evening_deposit_20260930/run_ev.py": "22d1d7ff1c6d329d5ad73815316c434f603e6afff9fafd6a85ca0c278c1f1598",
+  "eval/experiments/evening_deposit_20260930/postprocess_ev.py": "440ce13475e9df93a9827df7fef1f3ede8bb56da06aa4fc2ddaf6b2c559e666b",
+  "postprocess/postprocess_c1p_w9p.py": "ff95f1117b07027724c2974cb32c195ef5435b05830b20f76928c3c417a94eb9",
+  "eval/experiments/evening_deposit_20260930/run_d23s.py": "c75e6ee4ea7215bc09c9d08c8c684c07dc3927a108c07dd50548abb9eb3b7231",
+  "eval/experiments/evening_deposit_20260930/postprocess_d23s.py": "4c8e5ba7e5c0b04aa3d9f656a0b9f60c3819668b677f8a20d87b4f957936c244",
+  "eval/experiments/gen41_postproc_20261001/run_gen41.py": "e178ef3881ec0da46e3934c57d50d2a5ba51a246c58e05cd00d8557e88c00385",
+  "eval/experiments/gen70_postproc_20261017/run_gen70.py": "1225cd7afd31606aad6fbc64a1b86951271b7ca8dc20148a6e3d8febfc9e5340",
+  "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src/main.py": "01968cd3f005bba338e84a293a6114c61fc845e07f07a6aa8ab052402419b2a7",
+  "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src/model_ptr_infer.py": "4198f8b9c4807b27385126af7d4deb5a0c85fc6150a280baa5c61725acb64e97",
+  "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src/model_tf.py": "970c191073d55b59cfec8441ab5554b30b660bb28f5a1f9d8794d16281c24bc2",
+  "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src/obs_feat.py": "8d20f20d36836799c3cf21baeba865ddcbd34cdc305090f64cb655f22c740609",
+  "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src/cfg.json": "42b0cf625f16c3cf5d00c5f0de2329f237784f8be9cf98ae4aa286ec31baa095",
+  "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src/stock_target.json": "362f6ea695639c8fb9876062501e5b97b83e43ed01c4d13b44a160c6d43ee62c",
+  "$KAGG_SCRATCH/gen70_postproc_20261017/gen70_src/policy.pt": "76ec119f8513c8b728fbb0501b2839a0fe4556fdba96bbf6b8bd7e93b007f23c",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/main.py": "601d528bfeb266e7f34b08ac86ab1c731a04548dda04f14d20b778ae0d8ebc04",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/cfg.json": "42b0cf625f16c3cf5d00c5f0de2329f237784f8be9cf98ae4aa286ec31baa095",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/model_ptr_infer.py": "4198f8b9c4807b27385126af7d4deb5a0c85fc6150a280baa5c61725acb64e97",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/model_tf.py": "970c191073d55b59cfec8441ab5554b30b660bb28f5a1f9d8794d16281c24bc2",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/obs_feat.py": "8d20f20d36836799c3cf21baeba865ddcbd34cdc305090f64cb655f22c740609",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/stock_target.json": "362f6ea695639c8fb9876062501e5b97b83e43ed01c4d13b44a160c6d43ee62c",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/policy.pt": "76ec119f8513c8b728fbb0501b2839a0fe4556fdba96bbf6b8bd7e93b007f23c",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/postprocess_c1p_w9p.py": "ff95f1117b07027724c2974cb32c195ef5435b05830b20f76928c3c417a94eb9",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/collect_plan_d29.py": "563977472ac0ac0a6e59827f5adb7aeb7ab159e140f324da6830d4bb0f055505",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/postprocess_d23s_p1.py": "438d043a83d9f462b127575235d0d75d243da617a274585861452670d9acf74b",
+  "$KAGG_SCRATCH/team_subs_20261001/sub125/source/melon16.py": "827212e8f43cb6d22feb61722771eb6377ddc77807ddd844353ef8753041a810",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/main.py": "9aa1f254a0962713ebec1a004ee9f955ee66a697c2a588aaa6d77660ecd7b3d3",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/cfg.json": "42b0cf625f16c3cf5d00c5f0de2329f237784f8be9cf98ae4aa286ec31baa095",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/model_ptr_infer.py": "4198f8b9c4807b27385126af7d4deb5a0c85fc6150a280baa5c61725acb64e97",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/model_tf.py": "970c191073d55b59cfec8441ab5554b30b660bb28f5a1f9d8794d16281c24bc2",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/obs_feat.py": "8d20f20d36836799c3cf21baeba865ddcbd34cdc305090f64cb655f22c740609",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/stock_target.json": "362f6ea695639c8fb9876062501e5b97b83e43ed01c4d13b44a160c6d43ee62c",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/policy.pt": "76ec119f8513c8b728fbb0501b2839a0fe4556fdba96bbf6b8bd7e93b007f23c",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/postprocess_c1p_w9p.py": "ff95f1117b07027724c2974cb32c195ef5435b05830b20f76928c3c417a94eb9",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/collect_plan_d29.py": "563977472ac0ac0a6e59827f5adb7aeb7ab159e140f324da6830d4bb0f055505",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/postprocess_d23s_p1.py": "438d043a83d9f462b127575235d0d75d243da617a274585861452670d9acf74b",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/melon16.py": "827212e8f43cb6d22feb61722771eb6377ddc77807ddd844353ef8753041a810",
+  "$KAGG_SCRATCH/team_subs_20261001/sub126/source/melon_replant.py": "e8bb43191cc6a462e22eb8daf0af839fe7a4c4aadab7150d38a791b06b418245"
+ },
+ "report_sha256": {
+  "eval/experiments/gen41_postproc_20261001/report.py": "b4c4674da0417cd3bf541c96817b6493841a8f0a0383a7396af947534674ebdd",
+  "eval/experiments/gen41_postproc_20261001/report_c.py": "b74965d16b64d41015a3e1d805a7a3e263baa14ac4df4118aabe1e8ecfae0dae",
+  "eval/experiments/gen70_postproc_20261017/report_gen70.py": "8bc82e5fc1be7d3c3e651b30d573cfcbfec78f4c59b680d1b4c2a1c586653cb3"
+ }
+}

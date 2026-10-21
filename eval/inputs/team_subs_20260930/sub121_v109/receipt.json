@@ -1,0 +1,44 @@
+{
+ "name": "sub121_v109",
+ "files": [
+  {
+   "path": "cfg.json",
+   "bytes": 95,
+   "sha256": "664f9782e80cb8537f3a4de80d6e05ad4585140da2d2c7ab23f8acbeea282e20"
+  },
+  {
+   "path": "main.py",
+   "bytes": 6960,
+   "sha256": "ef3b0b92f1a3a75c4a127e42d308637985aecc7a9d90b418f68f606954973f35"
+  },
+  {
+   "path": "model_ptr_infer.py",
+   "bytes": 1322,
+   "sha256": "ab5c73320748c9038574a6bc2b6db552fb5cca3b28c6a90ada3f6dfbfd43026f",
+   "submitted_sha256": "4198f8b9c4807b27385126af7d4deb5a0c85fc6150a280baa5c61725acb64e97"
+  },
+  {
+   "path": "model_tf.py",
+   "bytes": 8484,
+   "sha256": "970c191073d55b59cfec8441ab5554b30b660bb28f5a1f9d8794d16281c24bc2"
+  },
+  {
+   "path": "obs_feat.py",
+   "bytes": 10109,
+   "sha256": "7fcab25049e7fc9c1b0839b1ee8d899ca10cbd30fa8819abb4a289d234d2123f",
+   "submitted_sha256": "8d20f20d36836799c3cf21baeba865ddcbd34cdc305090f64cb655f22c740609"
+  },
+  {
+   "path": "stock_target.json",
+   "bytes": 106524,
+   "sha256": "362f6ea695639c8fb9876062501e5b97b83e43ed01c4d13b44a160c6d43ee62c"
+  },
+  {
+   "path": "policy.pt",
+   "bytes": 41812471,
+   "sha256": "01a022b83c3931adff04d59ca096b6a515c9ea23fa647b0e48154794008dbfeb",
+   "note": "weights not in git and not published"
+  }
+ ],
+ "note": "File list of the submission. Comment lines naming a private computing environment were edited; submitted_sha256 gives the original."
+}

@@ -1,0 +1,23 @@
+# build outputs
+target/
+__pycache__/
+*.py[cod]
+
+# model weights and large binaries (weights are distributed separately, see submission/README.md)
+*.pt
+*.pth
+*.npy
+*.npz
+
+# local data, game logs and evaluation outputs
+data/
+logs/
+*.log
+replays/
+scratch/
+training/work/
+eval/experiments/*/games/
+eval/experiments/*/smoke/
+eval/experiments/*/smoke_*/
+eval/experiments/*/failure_*.json
+eval/experiments/*/summary_*.json

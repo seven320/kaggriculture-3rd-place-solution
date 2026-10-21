@@ -1,0 +1,10 @@
+[package]
+name = "kaggriculture-trace-policy"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+kaggriculture-engine = { path = "../kaggriculture-engine" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"

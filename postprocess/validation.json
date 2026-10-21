@@ -1,0 +1,238 @@
+{
+  "passed": true,
+  "test": "postprocess_c1p_w9p (KitHook.apply / apply) vs run_m.py C1p + M5 path (waste_replace2.replace_waste flags W3,W5,W6,W9,WT + run_c.Lazy + run_c.Top.finalize, then run_m.MTop.m5 with market_pp.fill_empty)",
+  "totals": {
+    "calls": 50704,
+    "equal": 50704,
+    "mismatch": 0,
+    "input_mutated": 0,
+    "changed": 3717,
+    "wr_status": {
+      "ok": 50704
+    },
+    "calls_with_empty": 6353,
+    "calls_with_empty_hour23": 3372,
+    "model_actions_with_empty": 613,
+    "model_actions_with_empty_hour23": 18
+  },
+  "by_kind": {
+    "model": {
+      "calls": 11504,
+      "equal": 11504,
+      "changed": 285,
+      "with_empty": 613,
+      "w9p": 0
+    },
+    "recorded": {
+      "calls": 11504,
+      "equal": 11504,
+      "changed": 247,
+      "with_empty": 104,
+      "w9p": 0
+    },
+    "random": {
+      "calls": 12944,
+      "equal": 12944,
+      "changed": 847,
+      "with_empty": 1364,
+      "w9p": 6
+    },
+    "synth": {
+      "calls": 11504,
+      "equal": 11504,
+      "changed": 547,
+      "with_empty": 1176,
+      "w9p": 1
+    },
+    "empty_pad": {
+      "calls": 1392,
+      "equal": 1392,
+      "changed": 196,
+      "with_empty": 1392,
+      "w9p": 154
+    },
+    "overflow": {
+      "calls": 1856,
+      "equal": 1856,
+      "changed": 1595,
+      "with_empty": 1704,
+      "w9p": 1587
+    }
+  },
+  "replaced_in_changed_calls": {
+    "W9'": 1748,
+    "W6": 724,
+    "W9": 335,
+    "W3": 1127,
+    "W5": 172,
+    "WT": 34
+  },
+  "episodes": [
+    {
+      "episode": 114643260,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 462,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 821,
+        "calls_with_empty_hour23": 425,
+        "model_actions_with_empty": 133,
+        "model_actions_with_empty_hour23": 5
+      },
+      "replay_sha256": "7a15b9eeb84efb4ea3c84cff00dd1274bfab24d01550adadf8127ba2c409be05"
+    },
+    {
+      "episode": 114563237,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 463,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 784,
+        "calls_with_empty_hour23": 411,
+        "model_actions_with_empty": 27,
+        "model_actions_with_empty_hour23": 0
+      },
+      "replay_sha256": "afb5126d9e648bdb7d8b08ebcc8e22e58a3c7ed1e9095dd24d47e3471b53528e"
+    },
+    {
+      "episode": 114638818,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 443,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 726,
+        "calls_with_empty_hour23": 423,
+        "model_actions_with_empty": 7,
+        "model_actions_with_empty_hour23": 0
+      },
+      "replay_sha256": "a1f05cfadc08be4ea23da3bf567a92b71504c5c5e6dbbef1a436c395f8536b03"
+    },
+    {
+      "episode": 114551580,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 488,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 738,
+        "calls_with_empty_hour23": 419,
+        "model_actions_with_empty": 46,
+        "model_actions_with_empty_hour23": 0
+      },
+      "replay_sha256": "db69f5edf3dee6c59dba37c770fca1c5ad2ba6bf242b33d6137c5c8ca43a6e72"
+    },
+    {
+      "episode": 114558870,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 477,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 727,
+        "calls_with_empty_hour23": 419,
+        "model_actions_with_empty": 0,
+        "model_actions_with_empty_hour23": 0
+      },
+      "replay_sha256": "bf324b7346f837efe62b8e98a7125de7409f29a49c546abe3d5c2439e6629abf"
+    },
+    {
+      "episode": 114641776,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 477,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 708,
+        "calls_with_empty_hour23": 417,
+        "model_actions_with_empty": 4,
+        "model_actions_with_empty_hour23": 1
+      },
+      "replay_sha256": "a10b4dcf4d08a1bcc78ddfa7909af2cf50e320aefd8280b869a8895ac4186e21"
+    },
+    {
+      "episode": 114624074,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 466,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 899,
+        "calls_with_empty_hour23": 423,
+        "model_actions_with_empty": 179,
+        "model_actions_with_empty_hour23": 3
+      },
+      "replay_sha256": "f6284fc8b0b81794ff22618447b10f8a411b93e593049e4b80ab0ccf9aad8fb3"
+    },
+    {
+      "episode": 114539949,
+      "steps": 719,
+      "totals": {
+        "calls": 6338,
+        "equal": 6338,
+        "mismatch": 0,
+        "input_mutated": 0,
+        "changed": 441,
+        "wr_status": {
+          "ok": 6338
+        },
+        "calls_with_empty": 950,
+        "calls_with_empty_hour23": 435,
+        "model_actions_with_empty": 217,
+        "model_actions_with_empty_hour23": 9
+      },
+      "replay_sha256": "6ee25e85aa3e45e8184c9e2364c7b1191a0c24f8cad1c72b2337207dce4f8d60"
+    }
+  ],
+  "mismatches": [],
+  "embedded_official_defs_identical": true,
+  "rules_source": "installed kaggle_environments",
+  "rules_sha256": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+  "portable_sha256": "ff95f1117b07027724c2974cb32c195ef5435b05830b20f76928c3c417a94eb9",
+  "waste_replace2_path": "eval/experiments/pass_noop_replace_v104_20260929/waste_replace2.py",
+  "waste_replace2_sha256": "2f46e499eea2b9a7e5d0bc6e00d2553735aca9e44273b3c52059290f34019453",
+  "market_pp_path": "eval/experiments/sub121_market_pp_20260930/market_pp.py",
+  "market_pp_sha256": "d9f9e456c7a947fe3417a4656d5dfe5b0d8ddeefb3aa2c95682f83e86d2c5f82",
+  "example_main_sha256": "9e00953692a5a80fa6bc8efd03eb108d35b9daa25d54d422c485bb8ac00d1ab6",
+  "example_policy_sha256": "01a022b83c3931adff04d59ca096b6a515c9ea23fa647b0e48154794008dbfeb",
+  "random_seed": 20260930,
+  "python": "3.11.14",
+  "seconds": 108.9
+}

@@ -1,0 +1,14 @@
+[workspace]
+resolver = "3"
+members = [
+    "kaggriculture-engine",
+    "kaggriculture-python-bridge",
+    "kaggriculture-trace-policy",
+    "kagg-ppo-native",
+]
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "thin"
+panic = "abort"

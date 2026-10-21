@@ -1,0 +1,45 @@
+{
+ "_public_note": "Public copy. This file is the protocol as fixed before the run. Paths were rewritten to this repository's layout (private experiment folders -> eval/experiments/, the evaluation runtime -> eval/harness/, the shared post-processing -> postprocess/, the local scratch root -> $KAGG_SCRATCH). The sha256 values are those of the files as run; files that only had their path constants cleaned for publication now hash differently, so `part` mode refuses to start until code_sha256 is regenerated (see eval/README.md). The harness packages and the native library were also renamed for publication (scripts.kagg_*, libkagg_ppo_native.so); keys use the new names, hashes are those of the files as run.",
+ "created_jst": "2026-10-01 02:52 JST(起動前に固定、02:53 に V の欄を追記: 初回起動が V 欄の欠落で全プロセス起動直後に停止、対局は 0。02:54 に code_sha256 から本腕で使わない run_diag.py/postprocess_diag.py を除去: 2 回目の起動が照合で停止、対局は 0)",
+ "purpose": "D23S_p1(ユーザー「DROP は、売る時に基準価格比が 1 以上なら売る」)。元の D23S の本走行は取りやめ(smoke −614)",
+ "control": "eval/experiments/collect_start_alpha_20260930/games5/plan_s708a010 の同じ局(再利用)",
+ "arms": {
+  "d23s_p1": "D23S と同じ(day 0〜28 の 23 時、接点上の全 unit の 移動/PASS/DROP/PICKUP を DROP に、あふれる時は売る品目の PLACE)。SELL は STRAWBERRY/MILK/MELON/CARROT/TOMATO/EGG のうち 23 時の価格 / 公式 base >= 1.0 の品目だけ足す(1.0 未満は倉庫に置く)。run_d23s.py d23s_p1"
+ },
+ "smoke": "smoke/d23s_p1_sub121_V0(sub121 32 局): 資金差 −8(自分 −63、相手 −55)、勝敗変化 0、倉庫の見込み一致 88/88、例外 0",
+ "seeds": {
+  "first": 174300000,
+  "count": 128
+ },
+ "jobs": "24 job を 8 プロセス × 3 job、PLAN_PROCS=1",
+ "opponents": [
+  "sub121_v109",
+  "sub122_v4x20",
+  "sub123s_gen21",
+  "mmpqbcw_gen32",
+  "mmpqbcw_gen34"
+ ],
+ "stopping": "途中の成績で停止・延長・構成変更なし。自動再起動なし",
+ "submission": false,
+ "note_sources": "code_sha256 keys are paths relative to the repository root (symlinks not resolved).",
+ "code_sha256": {
+  "eval/experiments/gen35_postproc_20260930/run_g35.py": "7a06fea25fc8ebd94cb684db33a2a9f541804215742b55b8cc660d2dcb4c9b9b",
+  "eval/experiments/sub121_market_pp_20260930/run_m.py": "819129c58cf9fca70b1b2006f58c3da6551a243e60fa3012f132a45dafb41656",
+  "eval/experiments/sub121_market_pp_20260930/market_pp.py": "d9f9e456c7a947fe3417a4656d5dfe5b0d8ddeefb3aa2c95682f83e86d2c5f82",
+  "eval/experiments/sub121_c1c2_20260930/run_c.py": "85dc3e7b6f466573e4659b05add36cfcd2498bf360aadb9dbd1d705f31fcc2b1",
+  "eval/experiments/sub121_w9t_20260930/run.py": "29963ac1dd9ea5543e9adca0f5e843b1b982501cb27dfab13afe738dd09cc09d",
+  "eval/experiments/pass_noop_replace_v104_20260929/waste_replace2.py": "2f46e499eea2b9a7e5d0bc6e00d2553735aca9e44273b3c52059290f34019453",
+  "eval/harness/nmb_eval.py": "120c9652e050182aa45d0ca275d42c8154a97a44ccbc611776f2533e78c2f2ad",
+  "site-packages/kaggle_environments/envs/kaggriculture/kaggriculture.py": "bc8a54879ef02c7ea64b8b333d6a976f0ea65c4949149d01f463f23bccee653e",
+  "engine/rust/target/release/libkagg_ppo_native.so": "4c211070b76d829c11c37b5a1dd60c19547b0779863536a41a175bc4f7d5557d",
+  "eval/experiments/collect_start_alpha_20260930/run_g5new.py": "1071394224fc466c73d9664164d15da032a550690fa93ccce27db21848dc8ac2",
+  "eval/experiments/sub121_collect_early_deposit_20260930/run_p_ed.py": "4b055b6e1c69480f3bd97ab4dadcc9694215d0b9a94fee0606ac42ef0857eada",
+  "eval/experiments/sub121_collect_early_deposit_20260930/planner_ed.py": "1f24205c972446b712cbdd3f9af8e64ceb43d65e7524b83d42aaa4332e165c5e",
+  "eval/experiments/evening_deposit_20260930/run_ev.py": "22d1d7ff1c6d329d5ad73815316c434f603e6afff9fafd6a85ca0c278c1f1598",
+  "eval/experiments/evening_deposit_20260930/postprocess_ev.py": "440ce13475e9df93a9827df7fef1f3ede8bb56da06aa4fc2ddaf6b2c559e666b",
+  "postprocess/postprocess_c1p_w9p.py": "ff95f1117b07027724c2974cb32c195ef5435b05830b20f76928c3c417a94eb9",
+  "eval/experiments/evening_deposit_20260930/run_d23s.py": "c75e6ee4ea7215bc09c9d08c8c684c07dc3927a108c07dd50548abb9eb3b7231",
+  "eval/experiments/evening_deposit_20260930/postprocess_d23s.py": "4c8e5ba7e5c0b04aa3d9f656a0b9f60c3819668b677f8a20d87b4f957936c244"
+ },
+ "V": 0.0
+}

@@ -1,0 +1,13 @@
+[package]
+name = "kagg-ppo-native"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+kaggriculture-engine = { path = "../kaggriculture-engine" }
+kaggriculture-python-bridge = { path = "../kaggriculture-python-bridge" }
+serde_json = "1"
