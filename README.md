@@ -2,7 +2,7 @@
 
 Code for team DSM's 3rd-place solution to the Kaggle competition "Kaggriculture".
 
-- Write-up: `<link to the Kaggle write-up, to be added>`
+- Write-up: https://www.kaggle.com/competitions/kaggriculture/writeups/kaggriculture-3rd-place-dsm-solution
 - Team members whose work is referenced here (Kaggle handles): denden, masspeaks, shimishige
 
 The final agent is a neural policy trained with the team's BC/PPO pipeline (final weights "gen70"), followed by rule-based post-processing stages inside
